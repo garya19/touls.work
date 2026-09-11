@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap">
 
 <style>
-/* ── Tokens ── */
 :root {
   --bg:           #F5F6F9;
   --surface:      #FFFFFF;
@@ -20,8 +19,8 @@
   --hero-soft:    #9AA3C2;
   --hero-line:    rgba(255,255,255,0.12);
   --feature-dot:  #2A6B4A;
+  --nav-h:        56px;
 }
-
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg:           #10121C;
@@ -51,7 +50,6 @@
   --feature-dot:  #3D9E6A;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -75,7 +73,7 @@ body {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 28px;
-  height: 56px;
+  height: var(--nav-h);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -107,10 +105,7 @@ body {
   background: var(--hero-bg);
   padding: 88px 28px 96px;
 }
-.hero-inner {
-  max-width: 680px;
-  margin: 0 auto;
-}
+.hero-inner { max-width: 680px; margin: 0 auto; }
 .hero-eyebrow {
   font-family: 'Outfit', sans-serif;
   font-size: 12.5px;
@@ -131,10 +126,7 @@ body {
   text-wrap: balance;
   margin-bottom: 24px;
 }
-.hero h1 em {
-  font-style: italic;
-  color: #A8C4FF;
-}
+.hero h1 em { font-style: italic; color: #A8C4FF; }
 .hero-sub {
   font-size: 18px;
   line-height: 1.6;
@@ -172,16 +164,13 @@ body {
 }
 .btn-ghost:hover { color: var(--hero-text); }
 
-/* ── Section container ── */
+/* ── Product section ── */
 .section {
   max-width: 1080px;
   margin: 0 auto;
   padding: 80px 28px;
-}
-.section-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0 28px;
+  /* Fix: ensure sticky nav doesn't clip the heading when scrolled to */
+  scroll-margin-top: var(--nav-h);
 }
 .section-label {
   font-family: 'Outfit', sans-serif;
@@ -216,16 +205,14 @@ body {
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
 }
 @media (max-width: 700px) {
   .product-card { grid-template-columns: 1fr; }
 }
 .product-card-body {
-  padding: 40px 40px 40px 40px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 .product-badge {
   display: inline-flex;
@@ -268,6 +255,7 @@ body {
   flex-direction: column;
   gap: 10px;
   margin-bottom: 32px;
+  flex: 1;
 }
 .feature-list li {
   display: flex;
@@ -308,7 +296,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px 32px;
-  gap: 12px;
   min-height: 280px;
 }
 .mock-invoice {
@@ -348,7 +335,6 @@ body {
   font-family: 'Outfit', sans-serif;
   font-variant-numeric: tabular-nums;
 }
-.mock-row:last-child { border-bottom: none; }
 .mock-total-row {
   display: flex;
   justify-content: space-between;
@@ -397,23 +383,41 @@ body {
   max-width: 56ch;
   margin: 0 auto;
 }
-.coming-strip p strong {
-  color: var(--text-mid);
-  font-weight: 600;
-}
+.coming-strip p strong { color: var(--text-mid); font-weight: 600; }
 
-/* ── Legal section ── */
-.legal-section {
+/* ── Legal panel (hidden until triggered) ── */
+.legal-panel {
+  display: none;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.legal-panel.is-open { display: block; }
+
+.legal-inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 80px 28px;
+  padding: 72px 28px 80px;
 }
-.legal-section + .legal-section {
-  padding-top: 0;
+.legal-inner-header {
+  text-align: center;
+  margin-bottom: 56px;
 }
-.policy-block { margin-bottom: 64px; }
-.policy-block:last-child { margin-bottom: 0; }
+.legal-inner-header .section-label { display: block; margin-bottom: 8px; }
+.legal-inner-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.legal-inner-header p {
+  font-size: 14px;
+  color: var(--text-soft);
+}
 
+.policy-block { margin-bottom: 64px; scroll-margin-top: calc(var(--nav-h) + 16px); }
+.policy-block:last-child { margin-bottom: 0; }
 .policy-head {
   display: flex;
   align-items: center;
@@ -422,12 +426,7 @@ body {
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border);
 }
-.policy-bar {
-  width: 3px; height: 26px;
-  background: var(--accent);
-  border-radius: 2px;
-  flex-shrink: 0;
-}
+.policy-bar { width: 3px; height: 26px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
 .policy-head h2 {
   font-family: 'Outfit', sans-serif;
   font-size: 20px;
@@ -445,11 +444,7 @@ body {
   margin: 30px 0 10px;
 }
 .policy-body p { color: var(--text); margin-bottom: 12px; max-width: 65ch; }
-.policy-body ul, .policy-body ol {
-  padding-left: 20px;
-  margin-bottom: 12px;
-  max-width: 65ch;
-}
+.policy-body ul, .policy-body ol { padding-left: 20px; margin-bottom: 12px; max-width: 65ch; }
 .policy-body li { margin-bottom: 6px; }
 .policy-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 .callout {
@@ -504,41 +499,91 @@ body {
   text-decoration: none;
 }
 .footer-brand span { color: #6B8FE8; }
-.footer-links {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+.footer-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .footer-links a {
   font-size: 13.5px;
   color: var(--hero-soft);
   text-decoration: none;
+  cursor: pointer;
   transition: color 0.15s;
 }
 .footer-links a:hover { color: var(--hero-text); }
-.footer-copy {
-  width: 100%;
-  font-size: 12.5px;
-  color: rgba(154,163,194,0.5);
-  margin-top: 8px;
+.footer-copy { width: 100%; font-size: 12.5px; color: rgba(154,163,194,0.5); margin-top: 8px; }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  /* Nav: tighter padding, smaller links */
+  .nav-inner { padding: 0 16px; gap: 2px; }
+  .nav-link { padding: 6px 10px; font-size: 13px; }
+
+  /* Hero: compress vertical space, stack actions */
+  .hero { padding: 52px 20px 64px; }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-sub { font-size: 16.5px; margin-bottom: 32px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 8px; }
+  .btn-primary { justify-content: center; padding: 15px 22px; font-size: 16px; }
+  .btn-ghost { justify-content: center; padding: 10px 4px; }
+
+  /* Product section */
+  .section { padding: 48px 16px; }
+  .section-sub { margin-bottom: 32px; font-size: 16px; }
+
+  /* Product card: single column already applied; tighten padding */
+  .product-card { border-radius: 10px; }
+  .product-card-body { padding: 24px 20px; }
+  .product-card-body h3 { font-size: 20px; }
+  .product-card-body .tagline { max-width: 100%; font-size: 15px; margin-bottom: 20px; }
+  .feature-list { gap: 8px; margin-bottom: 24px; }
+  .feature-list li { font-size: 14.5px; }
+
+  /* Full-width CTA button on mobile for easy tapping */
+  .product-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  /* Mock invoice panel: shorter, no dead space */
+  .product-card-visual { min-height: 180px; padding: 28px 20px; }
+  .mock-invoice { max-width: 100%; }
+
+  /* Coming strip */
+  .coming-strip { padding: 32px 20px; }
+  .coming-strip p { font-size: 14.5px; }
+
+  /* Legal */
+  .legal-inner { padding: 40px 16px 56px; }
+  .legal-inner-header { margin-bottom: 40px; }
+  .legal-inner-header h2 { font-size: 20px; }
+  .policy-body p,
+  .policy-body ul,
+  .policy-body ol,
+  .callout,
+  .contact-box { max-width: 100%; }
+  .policy-body { font-size: 15.5px; }
+
+  /* Footer: stack vertically */
+  .footer { padding: 28px 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-links { flex-wrap: wrap; gap: 14px 20px; }
+  .footer-links a { font-size: 13px; }
+  .footer-copy { margin-top: 4px; }
 }
 
-@media (max-width: 520px) {
-  .hero { padding: 60px 20px 72px; }
-  .product-card-body { padding: 28px 24px; }
-  .section { padding: 56px 20px; }
-  .legal-section { padding: 56px 20px; }
+/* Very small phones (≤380px) */
+@media (max-width: 380px) {
+  .nav-link.nav-hide-xs { display: none; }
+  .hero h1 { font-size: clamp(30px, 9vw, 40px); }
+  .product-card-visual { display: none; }
 }
 </style>
 
-<!-- ── Navigation ── -->
+<!-- ── Nav ── -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="#" class="nav-brand">touls<span>.work</span></a>
     <a href="#invoicebot" class="nav-link">InvoiceBot</a>
-    <a href="#privacy" class="nav-link">Privacy</a>
-    <a href="#refund" class="nav-link">Refunds</a>
     <a href="mailto:info@touls.work" class="nav-link">Contact</a>
   </div>
 </nav>
@@ -548,7 +593,7 @@ body {
   <div class="hero-inner">
     <p class="hero-eyebrow">touls.work</p>
     <h1>Everyday software,<br><em>thoughtfully simple.</em></h1>
-    <p class="hero-sub">We build small, focused tools that take the friction out of running your independent practice — so you can spend more time doing the work that matters.</p>
+    <p class="hero-sub">We build small, focused tools that remove friction from the tasks everyone deals with — so you can spend more time on what actually matters.</p>
     <div class="hero-actions">
       <a href="#invoicebot" class="btn-primary">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><path d="M5 8h6M5 5.5h4M5 10.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -562,8 +607,8 @@ body {
 <!-- ── Product section ── -->
 <div class="section" id="invoicebot">
   <p class="section-label">Now available</p>
-  <h2 class="section-heading">Tools built for independent coaches</h2>
-  <p class="section-sub">Our first tool is designed for health coaches, tutors, music teachers, and anyone who runs a practice solo — and hates doing paperwork.</p>
+  <h2 class="section-heading">Tools built for anyone who bills for their time</h2>
+  <p class="section-sub">Our first tool handles invoicing — for freelancers, consultants, coaches, tutors, and anyone else who'd rather not wrestle with spreadsheets or clunky software.</p>
 
   <div class="product-card">
     <div class="product-card-body">
@@ -578,7 +623,7 @@ body {
         <li>Customer records, payment reminders, and paid tracking</li>
         <li>Export to Google Sheets in one tap</li>
       </ul>
-      <a href="https://t.me/InvoiceToolBot" class="product-cta" target="_blank" rel="noopener">
+      <a href="https://t.me/invois_bot" class="product-cta" target="_blank" rel="noopener">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Try on Telegram
       </a>
@@ -601,112 +646,112 @@ body {
 
 <!-- ── Coming soon ── -->
 <div class="coming-strip">
-  <p><strong>More tools in the works.</strong> We're building a small suite of focused utilities for independent professionals — scheduling, client notes, and simple financial tracking. Early access via Telegram.</p>
+  <p><strong>More tools in the works.</strong> We're building a suite of focused utilities for everyday tasks — scheduling, expense tracking, document signing, and more. Early access via Telegram.</p>
 </div>
 
-<!-- ── Legal divider ── -->
-<hr class="section-divider" style="margin-top:72px;">
-
-<!-- ── Legal ── -->
-<div class="legal-section" id="legal">
-  <p class="section-label" style="text-align:center; margin-bottom:8px;">Legal</p>
-  <h2 class="section-heading" style="text-align:center; margin-bottom:6px;">Policies</h2>
-  <p style="text-align:center; color:var(--text-soft); font-size:15px; margin-bottom:56px;">Operated by Citadel Consulting · Last updated September 2026</p>
-
-  <!-- Privacy Policy -->
-  <div class="policy-block" id="privacy">
-    <div class="policy-head">
-      <div class="policy-bar"></div>
-      <h2>Privacy Policy</h2>
+<!-- ── Legal panel (hidden until footer link clicked) ── -->
+<div class="legal-panel" id="legal-panel">
+  <div class="legal-inner">
+    <div class="legal-inner-header">
+      <span class="section-label">Legal</span>
+      <h2>Policies</h2>
+      <p>Operated by Citadel Consulting &middot; Last updated September 2026</p>
     </div>
-    <div class="policy-body">
-      <p>This Privacy Policy explains how InvoiceBot ("we", "our", or "the service"), operated by Citadel Consulting via touls.work, collects, uses, and protects data when you use the InvoiceBot Telegram bot.</p>
 
-      <h3>What we collect</h3>
-      <ul>
-        <li><strong>Account details</strong> — your name, email address, country, and Telegram user ID</li>
-        <li><strong>Business details</strong> — invoice prefix, logo image, business address, tax registration number, UPI ID, and payment details you provide</li>
-        <li><strong>Customer records</strong> — names, cities, mobile numbers, and email addresses of customers you add</li>
-        <li><strong>Invoice data</strong> — line items, amounts, dates, and statuses of invoices you create</li>
-        <li><strong>Payment records</strong> — subscription amounts, payment method, and transaction IDs you submit</li>
-      </ul>
+    <div class="policy-block" id="privacy">
+      <div class="policy-head">
+        <div class="policy-bar"></div>
+        <h2>Privacy Policy</h2>
+      </div>
+      <div class="policy-body">
+        <p>This Privacy Policy explains how InvoiceBot ("we", "our", or "the service"), operated by Citadel Consulting via touls.work, collects, uses, and protects data when you use the InvoiceBot Telegram bot.</p>
 
-      <h3>How we use it</h3>
-      <ul>
-        <li>To generate PDF invoices and deliver them to your customers</li>
-        <li>To send invoice emails to customers on your behalf</li>
-        <li>To manage your subscription and verify payments</li>
-        <li>To export your data to Google Sheets when you request it</li>
-        <li>To notify you of payment confirmations and subscription status</li>
-      </ul>
+        <h3>What we collect</h3>
+        <ul>
+          <li><strong>Account details</strong> — your name, email address, country, and Telegram user ID</li>
+          <li><strong>Business details</strong> — invoice prefix, logo image, business address, tax registration number, UPI ID, and payment details you provide</li>
+          <li><strong>Customer records</strong> — names, cities, mobile numbers, and email addresses of customers you add</li>
+          <li><strong>Invoice data</strong> — line items, amounts, dates, and statuses of invoices you create</li>
+          <li><strong>Payment records</strong> — subscription amounts, payment method, and transaction IDs you submit</li>
+        </ul>
 
-      <h3>Third-party services</h3>
-      <ul>
-        <li><strong>Telegram</strong> — the messaging platform through which the bot operates. Subject to <a href="https://telegram.org/privacy" target="_blank" rel="noopener">Telegram's Privacy Policy</a>.</li>
-        <li><strong>Razorpay</strong> — processes subscription payments for overseas coaches. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.</li>
-        <li><strong>Resend</strong> — delivers invoice and receipt emails.</li>
-        <li><strong>Google</strong> — if you use the Sheets export, invoice data is written to your authorised Google Sheet.</li>
-      </ul>
-      <p>We do not sell, rent, or share your data with any other parties.</p>
+        <h3>How we use it</h3>
+        <ul>
+          <li>To generate PDF invoices and deliver them to your customers</li>
+          <li>To send invoice emails to customers on your behalf</li>
+          <li>To manage your subscription and verify payments</li>
+          <li>To export your data to Google Sheets when you request it</li>
+          <li>To notify you of payment confirmations and subscription status</li>
+        </ul>
 
-      <h3>Data retention</h3>
-      <p>Your data is retained for as long as your account is active. On deletion request, we remove your account, customers, and invoice records within 30 days. Payment receipts may be retained up to 7 years for accounting compliance.</p>
+        <h3>Third-party services</h3>
+        <ul>
+          <li><strong>Telegram</strong> — the messaging platform through which the bot operates. Subject to <a href="https://telegram.org/privacy" target="_blank" rel="noopener">Telegram's Privacy Policy</a>.</li>
+          <li><strong>Razorpay</strong> — processes subscription payments for overseas users. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.</li>
+          <li><strong>Resend</strong> — delivers invoice and receipt emails.</li>
+          <li><strong>Google</strong> — if you use the Sheets export, invoice data is written to your authorised Google Sheet.</li>
+        </ul>
+        <p>We do not sell, rent, or share your data with any other parties.</p>
 
-      <h3>Your rights</h3>
-      <p>You may access, correct, or request deletion of your personal data at any time. Coaches in the EEA hold additional rights under the GDPR, including data portability and the right to restrict processing.</p>
+        <h3>Data retention</h3>
+        <p>Your data is retained for as long as your account is active. On deletion request, we remove your account, customers, and invoice records within 30 days. Payment receipts may be retained up to 7 years for accounting compliance.</p>
 
-      <div class="callout">InvoiceBot does not store credit or debit card numbers. Card payments are processed entirely by Razorpay and we receive only a confirmation token.</div>
+        <h3>Your rights</h3>
+        <p>You may access, correct, or request deletion of your personal data at any time. Users in the EEA hold additional rights under the GDPR, including data portability and the right to restrict processing.</p>
 
-      <h3>Security</h3>
-      <p>Data is stored in a secured database on Railway's cloud infrastructure, accessible only to the service operator. Generated PDFs are stored in a persistent private volume.</p>
+        <div class="callout">InvoiceBot does not store credit or debit card numbers. Card payments are processed entirely by Razorpay and we receive only a confirmation token.</div>
 
-      <h3>Contact</h3>
-      <div class="contact-box">
-        <strong>Privacy enquiries</strong>
-        <a href="mailto:info@touls.work">info@touls.work</a> — or use "Message Admin" inside the bot.
+        <h3>Security</h3>
+        <p>Data is stored in a secured database on Railway's cloud infrastructure, accessible only to the service operator. Generated PDFs are stored in a persistent private volume.</p>
+
+        <h3>Contact</h3>
+        <div class="contact-box">
+          <strong>Privacy enquiries</strong>
+          <a href="mailto:info@touls.work">info@touls.work</a> — or use "Message Admin" inside the bot.
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Refund Policy -->
-  <div class="policy-block" id="refund">
-    <div class="policy-head">
-      <div class="policy-bar"></div>
-      <h2>Refund &amp; Cancellation Policy</h2>
-    </div>
-    <div class="policy-body">
-      <p>This policy applies to all subscription payments made through InvoiceBot, whether via UPI or Razorpay.</p>
+    <div class="policy-block" id="refund">
+      <div class="policy-head">
+        <div class="policy-bar"></div>
+        <h2>Refund &amp; Cancellation Policy</h2>
+      </div>
+      <div class="policy-body">
+        <p>This policy applies to all subscription payments made through InvoiceBot, whether via UPI or Razorpay.</p>
 
-      <h3>Free trial</h3>
-      <p>Every new coach receives a free trial allowing up to 3 invoices to be sent at no charge. No payment is required during the trial period.</p>
+        <h3>Free trial</h3>
+        <p>Every new user receives a free trial allowing up to 3 invoices to be sent at no charge. No payment is required during the trial period.</p>
 
-      <h3>Subscription terms</h3>
-      <ul>
-        <li>Subscriptions are billed monthly: Rs. 299/month for India, $9/month for international coaches.</li>
-        <li>Each payment grants 30 days of unlimited invoice access from the date of confirmation.</li>
-        <li>Subscriptions do not auto-renew — you pay each month when you choose to continue.</li>
-      </ul>
+        <h3>Subscription terms</h3>
+        <ul>
+          <li>Subscriptions are billed monthly: Rs. 299/month for India, $9/month for international users.</li>
+          <li>Each payment grants 30 days of unlimited invoice access from the date of confirmation.</li>
+          <li>Subscriptions do not auto-renew — you pay each month when you choose to continue.</li>
+        </ul>
 
-      <h3>Cancellation</h3>
-      <p>You may stop using the service at any time. Because subscriptions do not auto-renew, no cancellation action is required — simply do not make another payment when the current period ends.</p>
+        <h3>Cancellation</h3>
+        <p>You may stop using the service at any time. Because subscriptions do not auto-renew, no cancellation action is required — simply do not make another payment when the current period ends.</p>
 
-      <h3>Refunds</h3>
-      <div class="callout">Subscription fees are generally non-refundable once a payment is confirmed and the subscription period has begun.</div>
-      <p>Exceptions are made for:</p>
-      <ul>
-        <li><strong>Duplicate payment</strong> — charged more than once for the same period due to a technical error.</li>
-        <li><strong>Service unavailability</strong> — service inaccessible for more than 72 consecutive hours due to a fault on our side.</li>
-        <li><strong>Payment error</strong> — payment processed for the wrong amount due to a system error.</li>
-      </ul>
-      <p>Refund requests must be submitted within 7 days of the payment date. We do not offer refunds for partial months used or payments made in error after reviewing the price shown in the bot.</p>
+        <h3>Refunds</h3>
+        <div class="callout">Subscription fees are generally non-refundable once a payment is confirmed and the subscription period has begun.</div>
+        <p>Exceptions are made for:</p>
+        <ul>
+          <li><strong>Duplicate payment</strong> — charged more than once for the same period due to a technical error.</li>
+          <li><strong>Service unavailability</strong> — service inaccessible for more than 72 consecutive hours due to a fault on our side.</li>
+          <li><strong>Payment error</strong> — payment processed for the wrong amount due to a system error.</li>
+        </ul>
+        <p>Refund requests must be submitted within 7 days of the payment date. We do not offer refunds for partial months used or payments made in error after reviewing the price shown in the bot.</p>
 
-      <h3>How to request a refund</h3>
-      <div class="contact-box">
-        <strong>Refund requests</strong>
-        <a href="mailto:info@touls.work">info@touls.work</a> — include your Razorpay payment ID or UPI transaction reference.<br><br>
-        We respond within 2 business days and process approved refunds within 5–7 business days.
+        <h3>How to request a refund</h3>
+        <div class="contact-box">
+          <strong>Refund requests</strong>
+          <a href="mailto:info@touls.work">info@touls.work</a> — include your Razorpay payment ID or UPI transaction reference.<br><br>
+          We respond within 2 business days and process approved refunds within 5–7 business days.
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -716,10 +761,39 @@ body {
     <a href="#" class="footer-brand">touls<span>.work</span></a>
     <div class="footer-links">
       <a href="#invoicebot">InvoiceBot</a>
-      <a href="#privacy">Privacy Policy</a>
-      <a href="#refund">Refund Policy</a>
+      <a id="footer-privacy" href="#privacy">Privacy Policy</a>
+      <a id="footer-refund" href="#refund">Refund Policy</a>
       <a href="mailto:info@touls.work">info@touls.work</a>
     </div>
     <p class="footer-copy">&copy; 2026 Citadel Consulting. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  const panel = document.getElementById('legal-panel');
+
+  function openLegal(targetId) {
+    panel.classList.add('is-open');
+    // Let the panel render before scrolling
+    requestAnimationFrame(() => {
+      const el = document.getElementById(targetId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  document.getElementById('footer-privacy').addEventListener('click', function(e) {
+    e.preventDefault();
+    openLegal('privacy');
+  });
+
+  document.getElementById('footer-refund').addEventListener('click', function(e) {
+    e.preventDefault();
+    openLegal('refund');
+  });
+
+  // Support direct URLs: touls.work/#privacy or touls.work/#refund
+  const hash = window.location.hash.replace('#', '');
+  if (hash === 'privacy' || hash === 'refund') {
+    openLegal(hash);
+  }
+</script>
