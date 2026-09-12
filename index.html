@@ -289,6 +289,20 @@ body {
 }
 .product-cta:hover { background: var(--cta-hover); }
 
+.product-cta-ghost {
+  background: transparent;
+  color: var(--cta);
+  border: 1.5px solid var(--cta);
+}
+.product-cta-ghost svg path { stroke: var(--cta); }
+.product-cta-ghost:hover { background: color-mix(in srgb, var(--cta) 8%, transparent); }
+
+.cta-pair {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .product-card-visual {
   background: linear-gradient(145deg, #1D2B4F 0%, #243660 100%);
   display: flex;
@@ -536,7 +550,8 @@ body {
   .feature-list { gap: 8px; margin-bottom: 24px; }
   .feature-list li { font-size: 14.5px; }
 
-  /* Full-width CTA button on mobile for easy tapping */
+  /* Full-width CTA buttons on mobile for easy tapping */
+  .cta-pair { flex-direction: column; }
   .product-cta {
     width: 100%;
     justify-content: center;
@@ -623,10 +638,16 @@ body {
         <li>Customer records, payment reminders, and paid tracking</li>
         <li>Export to Google Sheets in one tap</li>
       </ul>
-      <a href="https://t.me/invois_bot" class="product-cta" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Try on Telegram
-      </a>
+      <div class="cta-pair">
+        <a href="https://t.me/invois_bot" class="product-cta product-cta-ghost" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free Trial
+        </a>
+        <a href="https://rzp.io/rzp/invoicebot" class="product-cta" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="white" stroke-width="2"/><path d="M2 10h20" stroke="white" stroke-width="2"/></svg>
+          Subscribe — $9/mo
+        </a>
+      </div>
     </div>
     <div class="product-card-visual">
       <div class="mock-invoice">
