@@ -1,0 +1,868 @@
+<title>touls.work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --bg:           #F5F6F9;
+  --surface:      #FFFFFF;
+  --text:         #1A1D2E;
+  --text-mid:     #4A5068;
+  --text-soft:    #7A809A;
+  --accent:       #2A6B4A;
+  --accent-light: #EAF4EE;
+  --cta:          #C86A20;
+  --cta-hover:    #A8561A;
+  --border:       #E0E2EE;
+  --hero-bg:      #1D2B4F;
+  --hero-text:    #EEF0F8;
+  --hero-soft:    #9AA3C2;
+  --hero-line:    rgba(255,255,255,0.12);
+  --feature-dot:  #2A6B4A;
+  --nav-h:        56px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:           #10121C;
+    --surface:      #181B2A;
+    --text:         #E8EAF4;
+    --text-mid:     #9098B8;
+    --text-soft:    #5A6080;
+    --accent:       #3D9E6A;
+    --accent-light: #162A20;
+    --cta:          #D4782A;
+    --cta-hover:    #B86420;
+    --border:       #252840;
+    --feature-dot:  #3D9E6A;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:           #10121C;
+  --surface:      #181B2A;
+  --text:         #E8EAF4;
+  --text-mid:     #9098B8;
+  --text-soft:    #5A6080;
+  --accent:       #3D9E6A;
+  --accent-light: #162A20;
+  --cta:          #D4782A;
+  --cta-hover:    #B86420;
+  --border:       #252840;
+  --feature-dot:  #3D9E6A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--hero-bg);
+  border-bottom: 1px solid var(--hero-line);
+}
+.nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--hero-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+.nav-brand span { color: #6B8FE8; }
+.nav-link {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--hero-soft);
+  text-decoration: none;
+  padding: 6px 13px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover { color: var(--hero-text); background: rgba(255,255,255,0.07); }
+
+/* ── Hero ── */
+.hero {
+  background: var(--hero-bg);
+  padding: 88px 28px 96px;
+}
+.hero-inner { max-width: 680px; margin: 0 auto; }
+.hero-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6B8FE8;
+  margin-bottom: 22px;
+}
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 300;
+  font-optical-sizing: auto;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--hero-text);
+  text-wrap: balance;
+  margin-bottom: 24px;
+}
+.hero h1 em { font-style: italic; color: #A8C4FF; }
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--hero-soft);
+  max-width: 52ch;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cta);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--cta-hover); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hero-soft);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 4px;
+  transition: color 0.15s;
+}
+.btn-ghost:hover { color: var(--hero-text); }
+
+/* ── Product section ── */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 80px 28px;
+  /* Fix: ensure sticky nav doesn't clip the heading when scrolled to */
+  scroll-margin-top: var(--nav-h);
+}
+.section-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.section-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-wrap: balance;
+  margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 58ch;
+  margin-bottom: 48px;
+}
+
+/* ── Product card ── */
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 700px) {
+  .product-card { grid-template-columns: 1fr; }
+}
+.product-card-body {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.product-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 4px 11px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+.product-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.product-card-body h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.product-card-body .tagline {
+  font-size: 15.5px;
+  color: var(--text-mid);
+  margin-bottom: 28px;
+  max-width: 38ch;
+}
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+  flex: 1;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-mid);
+}
+.feature-list li::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--feature-dot);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.product-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cta);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  width: fit-content;
+  transition: background 0.15s;
+}
+.product-cta:hover { background: var(--cta-hover); }
+
+.product-cta-ghost {
+  background: transparent;
+  color: var(--cta);
+  border: 1.5px solid var(--cta);
+}
+.product-cta-ghost svg path { stroke: var(--cta); }
+.product-cta-ghost:hover { background: color-mix(in srgb, var(--cta) 8%, transparent); }
+
+.product-cta-disabled {
+  background: var(--border);
+  color: var(--text-soft);
+  cursor: not-allowed;
+  pointer-events: none;
+  user-select: none;
+}
+.subscribe-wrap { display: flex; flex-direction: column; gap: 6px; }
+.subscribe-unavailable {
+  font-size: 12px;
+  color: var(--text-soft);
+  font-family: 'Outfit', sans-serif;
+}
+
+.cta-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.cta-pair {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.product-card-visual {
+  background: linear-gradient(145deg, #1D2B4F 0%, #243660 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  min-height: 280px;
+}
+.mock-invoice {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 20px 22px;
+  width: 100%;
+  max-width: 240px;
+}
+.mock-invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.mock-invoice-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B8FE8;
+}
+.mock-invoice-num {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Outfit', monospace;
+}
+.mock-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.55);
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-family: 'Outfit', sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.mock-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  font-family: 'Outfit', sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.mock-sent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(42,107,74,0.35);
+  border: 1px solid rgba(42,107,74,0.5);
+  color: #6EDEA4;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+.mock-sent-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #6EDEA4;
+}
+
+/* ── Coming soon strip ── */
+.coming-strip {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 28px;
+  text-align: center;
+}
+.coming-strip p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--text-soft);
+  max-width: 56ch;
+  margin: 0 auto;
+}
+.coming-strip p strong { color: var(--text-mid); font-weight: 600; }
+
+/* ── Legal panel (hidden until triggered) ── */
+.legal-panel {
+  display: none;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.legal-panel.is-open { display: block; }
+
+.legal-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 72px 28px 80px;
+}
+.legal-inner-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.legal-inner-header .section-label { display: block; margin-bottom: 8px; }
+.legal-inner-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.legal-inner-header p {
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.policy-block { margin-bottom: 64px; scroll-margin-top: calc(var(--nav-h) + 16px); }
+.policy-block:last-child { margin-bottom: 0; }
+.policy-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.policy-bar { width: 3px; height: 26px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+.policy-head h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.policy-body h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 30px 0 10px;
+}
+.policy-body p { color: var(--text); margin-bottom: 12px; max-width: 65ch; }
+.policy-body ul, .policy-body ol { padding-left: 20px; margin-bottom: 12px; max-width: 65ch; }
+.policy-body li { margin-bottom: 6px; }
+.policy-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.callout {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 13px 17px;
+  margin: 16px 0;
+  font-size: 15px;
+  max-width: 65ch;
+}
+.contact-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-top: 16px;
+  max-width: 65ch;
+  font-size: 15px;
+}
+.contact-box strong {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--hero-bg);
+  border-top: 1px solid var(--hero-line);
+  padding: 36px 28px;
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-brand {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--hero-text);
+  text-decoration: none;
+}
+.footer-brand span { color: #6B8FE8; }
+.footer-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 13.5px;
+  color: var(--hero-soft);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--hero-text); }
+.footer-copy { width: 100%; font-size: 12.5px; color: rgba(154,163,194,0.5); margin-top: 8px; }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  /* Nav: tighter padding, smaller links */
+  .nav-inner { padding: 0 16px; gap: 2px; }
+  .nav-link { padding: 6px 10px; font-size: 13px; }
+
+  /* Hero: compress vertical space, stack actions */
+  .hero { padding: 52px 20px 64px; }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-sub { font-size: 16.5px; margin-bottom: 32px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 8px; }
+  .btn-primary { justify-content: center; padding: 15px 22px; font-size: 16px; }
+  .btn-ghost { justify-content: center; padding: 10px 4px; }
+
+  /* Product section */
+  .section { padding: 48px 16px; }
+  .section-sub { margin-bottom: 32px; font-size: 16px; }
+
+  /* Product card: single column already applied; tighten padding */
+  .product-card { border-radius: 10px; }
+  .product-card-body { padding: 24px 20px; }
+  .product-card-body h3 { font-size: 20px; }
+  .product-card-body .tagline { max-width: 100%; font-size: 15px; margin-bottom: 20px; }
+  .feature-list { gap: 8px; margin-bottom: 24px; }
+  .feature-list li { font-size: 14.5px; }
+
+  /* Full-width CTA buttons on mobile for easy tapping */
+  .cta-pair { flex-direction: column; }
+  .product-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+
+  /* Mock invoice panel: shorter, no dead space */
+  .product-card-visual { min-height: 180px; padding: 28px 20px; }
+  .mock-invoice { max-width: 100%; }
+
+  /* Coming strip */
+  .coming-strip { padding: 32px 20px; }
+  .coming-strip p { font-size: 14.5px; }
+
+  /* Legal */
+  .legal-inner { padding: 40px 16px 56px; }
+  .legal-inner-header { margin-bottom: 40px; }
+  .legal-inner-header h2 { font-size: 20px; }
+  .policy-body p,
+  .policy-body ul,
+  .policy-body ol,
+  .callout,
+  .contact-box { max-width: 100%; }
+  .policy-body { font-size: 15.5px; }
+
+  /* Footer: stack vertically */
+  .footer { padding: 28px 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-links { flex-wrap: wrap; gap: 14px 20px; }
+  .footer-links a { font-size: 13px; }
+  .footer-copy { margin-top: 4px; }
+}
+
+/* Very small phones (≤380px) */
+@media (max-width: 380px) {
+  .nav-link.nav-hide-xs { display: none; }
+  .hero h1 { font-size: clamp(30px, 9vw, 40px); }
+  .product-card-visual { display: none; }
+}
+</style>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">touls<span>.work</span></a>
+    <a href="https://t.me/invois_bot" class="nav-link" target="_blank" rel="noopener">InvoiceBot</a>
+    <a href="mailto:info@touls.work" class="nav-link">Contact</a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">touls.work</p>
+    <h1>Everyday software,<br><em>thoughtfully simple.</em></h1>
+    <p class="hero-sub">We build small, focused tools that remove friction from the tasks everyone deals with — so you can spend more time on what actually matters.</p>
+    <div class="hero-actions">
+      <a href="#invoicebot" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><path d="M5 8h6M5 5.5h4M5 10.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        See our tools
+      </a>
+      <a href="mailto:info@touls.work" class="btn-ghost">Get in touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Product section ── -->
+<div class="section" id="invoicebot">
+  <p class="section-label">Now available</p>
+  <h2 class="section-heading">Tools built for anyone who bills for their time</h2>
+  <p class="section-sub">Our first tool handles invoicing — for freelancers, consultants, coaches, tutors, and anyone else who'd rather not wrestle with spreadsheets or clunky software.</p>
+
+  <div class="product-card">
+    <div class="product-card-body">
+      <div class="product-badge"><span class="dot"></span>Live on Telegram</div>
+      <h3>InvoiceBot</h3>
+      <p class="tagline">Create, send, and track invoices — entirely within Telegram. No app to download, no dashboard to learn.</p>
+      <ul class="feature-list">
+        <li>PDF invoices with your logo, delivered by email or Telegram</li>
+        <li>Multi-line items, custom dates, and invoice numbering</li>
+        <li>Tax invoice support for any country — GST, VAT, HST and more</li>
+        <li>Multi-currency with UPI (India) and card payment options</li>
+        <li>Customer records, payment reminders, and paid tracking</li>
+        <li>Export to Google Sheets in one tap</li>
+        <li><strong>Start your free trial today!</strong> Send up to 3 invoices at no cost — no card required.</li>
+      </ul>
+      <p class="cta-label">Live on Telegram</p>
+      <div class="cta-pair">
+        <a href="https://t.me/invois_bot" class="product-cta product-cta-ghost" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free Trial
+        </a>
+        <!-- India: UPI via bot -->
+        <div id="subscribe-india" class="subscribe-wrap" hidden>
+          <a href="https://t.me/invois_bot" class="product-cta" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="white" stroke-width="2"/><path d="M2 10h20" stroke="white" stroke-width="2"/></svg>
+            Subscribe — Rs. 299/mo
+          </a>
+        </div>
+        <!-- Overseas: not yet available -->
+        <div id="subscribe-overseas" class="subscribe-wrap" hidden>
+          <span class="product-cta product-cta-disabled">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#9098B8" stroke-width="2"/><path d="M2 10h20" stroke="#9098B8" stroke-width="2"/></svg>
+            Subscribe
+          </span>
+          <p class="subscribe-unavailable">InvoiceBot is currently not available in your location.</p>
+        </div>
+      </div>
+    </div>
+    <div class="product-card-visual">
+      <div class="mock-invoice">
+        <div class="mock-invoice-header">
+          <span class="mock-invoice-title">Tax Invoice</span>
+          <span class="mock-invoice-num">INV-2026-041</span>
+        </div>
+        <div class="mock-row"><span>Monthly coaching</span><span>3,500</span></div>
+        <div class="mock-row"><span>Nutrition plan</span><span>800</span></div>
+        <div class="mock-row"><span>GST (18%)</span><span>774</span></div>
+        <div class="mock-total-row"><span>Total</span><span>Rs. 5,074</span></div>
+        <div class="mock-sent-badge">Sent to client</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Coming soon ── -->
+<div class="coming-strip">
+  <p><strong>More tools in the works.</strong> We're building a suite of focused utilities for everyday tasks — scheduling, expense tracking, document signing, and more. Early access via Telegram.</p>
+</div>
+
+<!-- ── Legal panel (hidden until footer link clicked) ── -->
+<div class="legal-panel" id="legal-panel">
+  <div class="legal-inner">
+    <div class="legal-inner-header">
+      <span class="section-label">Legal</span>
+      <h2>Policies</h2>
+      <p>Operated by Citadel Consulting &middot; Last updated September 2026</p>
+    </div>
+
+    <div class="policy-block" id="privacy">
+      <div class="policy-head">
+        <div class="policy-bar"></div>
+        <h2>Privacy Policy</h2>
+      </div>
+      <div class="policy-body">
+        <p>This Privacy Policy explains how InvoiceBot ("we", "our", or "the service"), operated by Citadel Consulting via touls.work, collects, uses, and protects data when you use the InvoiceBot Telegram bot.</p>
+
+        <h3>What we collect</h3>
+        <ul>
+          <li><strong>Account details</strong> — your name, email address, country, and Telegram user ID</li>
+          <li><strong>Business details</strong> — invoice prefix, logo image, business address, tax registration number, UPI ID, and payment details you provide</li>
+          <li><strong>Customer records</strong> — names, cities, mobile numbers, and email addresses of customers you add</li>
+          <li><strong>Invoice data</strong> — line items, amounts, dates, and statuses of invoices you create</li>
+          <li><strong>Payment records</strong> — subscription amounts, payment method, and transaction IDs you submit</li>
+        </ul>
+
+        <h3>How we use it</h3>
+        <ul>
+          <li>To generate PDF invoices and deliver them to your customers</li>
+          <li>To send invoice emails to customers on your behalf</li>
+          <li>To manage your subscription and verify payments</li>
+          <li>To export your data to Google Sheets when you request it</li>
+          <li>To notify you of payment confirmations and subscription status</li>
+        </ul>
+
+        <h3>Third-party services</h3>
+        <ul>
+          <li><strong>Telegram</strong> — the messaging platform through which the bot operates. Subject to <a href="https://telegram.org/privacy" target="_blank" rel="noopener">Telegram's Privacy Policy</a>.</li>
+          <li><strong>Razorpay</strong> — processes subscription payments for overseas users. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.</li>
+          <li><strong>Resend</strong> — delivers invoice and receipt emails.</li>
+          <li><strong>Google</strong> — if you use the Sheets export, invoice data is written to your authorised Google Sheet.</li>
+        </ul>
+        <p>We do not sell, rent, or share your data with any other parties.</p>
+
+        <h3>Data retention</h3>
+        <p>Your data is retained for as long as your account is active. On deletion request, we remove your account, customers, and invoice records within 30 days. Payment receipts may be retained up to 7 years for accounting compliance.</p>
+
+        <h3>Your rights</h3>
+        <p>You may access, correct, or request deletion of your personal data at any time. Users in the EEA hold additional rights under the GDPR, including data portability and the right to restrict processing.</p>
+
+        <div class="callout">InvoiceBot does not store credit or debit card numbers. Card payments are processed entirely by Razorpay and we receive only a confirmation token.</div>
+
+        <h3>Security</h3>
+        <p>Data is stored in a secured database on Railway's cloud infrastructure, accessible only to the service operator. Generated PDFs are stored in a persistent private volume.</p>
+
+        <h3>Contact</h3>
+        <div class="contact-box">
+          <strong>Privacy enquiries</strong>
+          <a href="mailto:info@touls.work">info@touls.work</a> — or use "Message Admin" inside the bot.
+        </div>
+      </div>
+    </div>
+
+    <div class="policy-block" id="refund">
+      <div class="policy-head">
+        <div class="policy-bar"></div>
+        <h2>Refund &amp; Cancellation Policy</h2>
+      </div>
+      <div class="policy-body">
+        <p>This policy applies to all subscription payments made through InvoiceBot, whether via UPI or Razorpay.</p>
+
+        <h3>Free trial</h3>
+        <p>Every new user receives a free trial allowing up to 3 invoices to be sent at no charge. No payment is required during the trial period.</p>
+
+        <h3>Subscription terms</h3>
+        <ul>
+          <li>Subscriptions are billed monthly: Rs. 299/month for India, $9/month for international users.</li>
+          <li>Each payment grants 30 days of unlimited invoice access from the date of confirmation.</li>
+          <li>Subscriptions do not auto-renew — you pay each month when you choose to continue.</li>
+        </ul>
+
+        <h3>Cancellation</h3>
+        <p>You may stop using the service at any time. Because subscriptions do not auto-renew, no cancellation action is required — simply do not make another payment when the current period ends.</p>
+
+        <h3>Refunds</h3>
+        <div class="callout">Subscription fees are generally non-refundable once a payment is confirmed and the subscription period has begun.</div>
+        <p>Exceptions are made for:</p>
+        <ul>
+          <li><strong>Duplicate payment</strong> — charged more than once for the same period due to a technical error.</li>
+          <li><strong>Service unavailability</strong> — service inaccessible for more than 72 consecutive hours due to a fault on our side.</li>
+          <li><strong>Payment error</strong> — payment processed for the wrong amount due to a system error.</li>
+        </ul>
+        <p>Refund requests must be submitted within 7 days of the payment date. We do not offer refunds for partial months used or payments made in error after reviewing the price shown in the bot.</p>
+
+        <h3>How to request a refund</h3>
+        <div class="contact-box">
+          <strong>Refund requests</strong>
+          <a href="mailto:info@touls.work">info@touls.work</a> — include your Razorpay payment ID or UPI transaction reference.<br><br>
+          We respond within 2 business days and process approved refunds within 5–7 business days.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="#" class="footer-brand">touls<span>.work</span></a>
+    <div class="footer-links">
+      <a href="https://t.me/invois_bot" target="_blank" rel="noopener">InvoiceBot</a>
+      <a id="footer-privacy" href="#privacy">Privacy Policy</a>
+      <a id="footer-refund" href="#refund">Refund Policy</a>
+      <a href="mailto:info@touls.work">info@touls.work</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Citadel Consulting. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const panel = document.getElementById('legal-panel');
+
+  function openLegal(targetId) {
+    panel.classList.add('is-open');
+    // Let the panel render before scrolling
+    requestAnimationFrame(() => {
+      const el = document.getElementById(targetId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  document.getElementById('footer-privacy').addEventListener('click', function(e) {
+    e.preventDefault();
+    openLegal('privacy');
+  });
+
+  document.getElementById('footer-refund').addEventListener('click', function(e) {
+    e.preventDefault();
+    openLegal('refund');
+  });
+
+  // Support direct URLs: touls.work/#privacy or touls.work/#refund
+  const hash = window.location.hash.replace('#', '');
+  if (hash === 'privacy' || hash === 'refund') {
+    openLegal(hash);
+  }
+
+  // Geo-based subscribe button: India → Rs. 299 UPI, elsewhere → unavailable
+  (async function showSubscribeButton() {
+    let isIndia = true; // default to India on error (primary market)
+    try {
+      const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(4000) });
+      const data = await res.json();
+      isIndia = data.country_code === 'IN';
+    } catch (_) { /* use default */ }
+    document.getElementById('subscribe-india').hidden = !isIndia;
+    document.getElementById('subscribe-overseas').hidden = isIndia;
+  })();
+</script>
