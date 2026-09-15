@@ -693,7 +693,7 @@ body {
       </div>
     </div>
     <div class="product-card-visual">
-      <div class="mock-invoice">
+      <div class="mock-invoice" id="mock-invoice">
         <div class="mock-invoice-header">
           <span class="mock-invoice-title">Tax Invoice</span>
           <span class="mock-invoice-num">INV-2026-041</span>
@@ -861,15 +861,31 @@ body {
     openLegal(hash);
   }
 
-  // Geo-based subscribe button: India → Rs. 299 UPI, elsewhere → unavailable
-  (async function showSubscribeButton() {
-    let isIndia = true; // default to India on error (primary market)
+  // Single geo lookup — drives both the subscribe buttons and the mock invoice
+  (async function applyGeo() {
+    let isIndia = true; // default: India (primary market)
     try {
       const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(4000) });
       const data = await res.json();
       isIndia = data.country_code === 'IN';
     } catch (_) { /* use default */ }
+
+    // Subscribe buttons
     document.getElementById('subscribe-india').hidden = !isIndia;
     document.getElementById('subscribe-overseas').hidden = isIndia;
+
+    // Mock invoice panel
+    if (!isIndia) {
+      document.getElementById('mock-invoice').innerHTML =
+        '<div class="mock-invoice-header">' +
+          '<span class="mock-invoice-title">Invoice</span>' +
+          '<span class="mock-invoice-num">INV-2026-041</span>' +
+        '</div>' +
+        '<div class="mock-row"><span>Strategy session (2h)</span><span>$160</span></div>' +
+        '<div class="mock-row"><span>Brand audit report</span><span>$95</span></div>' +
+        '<div class="mock-row"><span>Tax (10%)</span><span>$25.50</span></div>' +
+        '<div class="mock-total-row"><span>Total</span><span>$280.50</span></div>' +
+        '<div class="mock-sent-badge">Sent to client</div>';
+    }
   })();
 </script>
