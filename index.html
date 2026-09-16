@@ -413,6 +413,59 @@ body {
   background: #6EDEA4;
 }
 
+/* ── Chat mock (LinguaPractice visual) ── */
+.mock-chat {
+  width: 100%;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-bubble {
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 88%;
+}
+.chat-bubble.bot {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.88);
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+.chat-bubble.user {
+  background: rgba(61,158,106,0.35);
+  border: 1px solid rgba(61,158,106,0.45);
+  color: rgba(255,255,255,0.92);
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+.chat-translation {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.42);
+  margin-top: 2px;
+  font-style: italic;
+  padding-left: 2px;
+}
+.chat-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #6EDEA4;
+  font-family: 'Outfit', sans-serif;
+  align-self: flex-end;
+}
+
+/* ── Product card separator ── */
+.product-card + .product-card {
+  margin-top: 28px;
+}
+
 /* ── Coming soon strip ── */
 .coming-strip {
   background: var(--surface);
@@ -629,7 +682,8 @@ body {
 <nav class="nav">
   <div class="nav-inner">
     <a href="#" class="nav-brand">touls<span>.work</span></a>
-    <a href="https://t.me/invois_bot" class="nav-link" target="_blank" rel="noopener">EzeInvoice</a>
+    <a href="#invoicebot" class="nav-link">EzeInvoice</a>
+    <a href="#linguapractice" class="nav-link nav-hide-xs">LinguaPractice</a>
     <a href="mailto:info@touls.work" class="nav-link">Contact</a>
   </div>
 </nav>
@@ -653,8 +707,8 @@ body {
 <!-- ── Product section ── -->
 <div class="section" id="invoicebot">
   <p class="section-label">Now available</p>
-  <h2 class="section-heading">Tools built for anyone who bills for their time</h2>
-  <p class="section-sub">Our first tool handles invoicing — for freelancers, consultants, coaches, tutors, and anyone else who'd rather not wrestle with spreadsheets or clunky software.</p>
+  <h2 class="section-heading">Small tools that do one thing well</h2>
+  <p class="section-sub">Each tool we ship solves a single, everyday problem — invoicing, language learning, and more. No bloat, no learning curve.</p>
 
   <div class="product-card">
     <div class="product-card-body">
@@ -703,6 +757,58 @@ body {
         <div class="mock-row"><span>GST (18%)</span><span>774</span></div>
         <div class="mock-total-row"><span>Total</span><span>Rs. 5,074</span></div>
         <div class="mock-sent-badge">Sent to client</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LinguaPractice section ── -->
+<div class="section" id="linguapractice" style="padding-top: 0;">
+  <div class="product-card">
+    <div class="product-card-body">
+      <div class="product-badge"><span class="dot"></span>Live on Telegram</div>
+      <h3>LinguaPractice</h3>
+      <p class="tagline">An AI Spanish tutor for school students — practice real conversations and get scored on every reply, right inside Telegram.</p>
+      <ul class="feature-list">
+        <li>Conversational Spanish practice for CBSE/ICSE students up to Class 9</li>
+        <li>Instant scoring (0–10) and feedback on every response</li>
+        <li>English translation of the bot's Spanish replies</li>
+        <li>Three difficulty levels: Easy, Moderate, Proficiency</li>
+        <li>Session stats and progress tracking with /stats</li>
+        <li>10-exchange sessions with a cooldown — paced like a real class</li>
+      </ul>
+      <p class="cta-label">Try it on Telegram</p>
+      <div class="cta-pair">
+        <a href="https://t.me/talkspaniol_bot" class="product-cta product-cta-ghost" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Start Practising
+        </a>
+      </div>
+    </div>
+    <div class="product-card-visual">
+      <div class="mock-chat">
+        <div class="chat-bubble bot">
+          ¡Hola! ¿Cómo te llamas?
+          <div class="chat-translation">Hi! What is your name?</div>
+        </div>
+        <div class="chat-bubble user">
+          Me llamo Priya. ¿Y tú?
+        </div>
+        <div class="chat-score">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#6EDEA4" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#6EDEA4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Score: 9/10 · Great answer!
+        </div>
+        <div class="chat-bubble bot">
+          Me llamo Bot. ¡Mucho gusto, Priya!
+          <div class="chat-translation">My name is Bot. Nice to meet you, Priya!</div>
+        </div>
+        <div class="chat-bubble user">
+          Mucho gusto también.
+        </div>
+        <div class="chat-score">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#6EDEA4" stroke-width="1.2"/><path d="M4 6l1.5 1.5L8 4.5" stroke="#6EDEA4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Score: 10/10 · Perfect!
+        </div>
       </div>
     </div>
   </div>
@@ -825,6 +931,7 @@ body {
     <a href="#" class="footer-brand">touls<span>.work</span></a>
     <div class="footer-links">
       <a href="https://t.me/invois_bot" target="_blank" rel="noopener">EzeInvoice</a>
+      <a href="#linguapractice">LinguaPractice</a>
       <a id="footer-privacy" href="#privacy">Privacy Policy</a>
       <a id="footer-refund" href="#refund">Refund Policy</a>
       <a href="mailto:info@touls.work">info@touls.work</a>
