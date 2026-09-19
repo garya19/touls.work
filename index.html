@@ -501,6 +501,22 @@ body {
   justify-content: center;
   min-height: 44px;
 }
+.tg-login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #229ED9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.tg-login-btn:hover { background: #1A87BD; }
 /* Post-login card */
 .tg-logged-in {
   display: flex;
@@ -906,12 +922,11 @@ body {
 
     <!-- Widget shown before login -->
     <div class="tg-widget-wrap" id="tg-widget-wrap">
-      <script async src="https://telegram.org/js/telegram-widget.js?22"
-        data-telegram-login="invois_bot"
-        data-size="large"
-        data-userpic="true"
-        data-onauth="onTelegramAuth(user)">
-      </script>
+      <button class="tg-login-btn" id="tg-login-btn" onclick="openTelegramLogin()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.24 13.748l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.908.811z"/></svg>
+        Sign in with Telegram
+      </button>
+      <script src="https://telegram.org/js/telegram-login.js"></script>
     </div>
 
     <!-- Shown after login -->
@@ -1120,19 +1135,27 @@ body {
   // ── Telegram login ─────────────────────────────────────────────────────────
   function showLoggedIn(user) {
     document.getElementById('tg-widget-wrap').hidden = true;
-    var loggedIn = document.getElementById('tg-logged-in');
-    loggedIn.hidden = false;
-    document.getElementById('tg-welcome').textContent = 'Welcome back, ' + user.first_name + '!';
-    if (user.photo_url) {
+    document.getElementById('tg-logged-in').hidden = false;
+    var name = user.given_name || user.name || user.first_name || 'there';
+    document.getElementById('tg-welcome').textContent = 'Welcome, ' + name + '!';
+    var pic = user.picture || user.photo_url;
+    if (pic) {
       var img = document.getElementById('tg-avatar');
-      img.src = user.photo_url;
+      img.src = pic;
       img.hidden = false;
     }
   }
 
-  function onTelegramAuth(user) {
-    try { sessionStorage.setItem('tg_user', JSON.stringify(user)); } catch(_) {}
-    showLoggedIn(user);
+  function openTelegramLogin() {
+    if (typeof Telegram === 'undefined' || !Telegram.Login) {
+      alert('Telegram login is loading, please try again in a moment.');
+      return;
+    }
+    Telegram.Login.auth({ client_id: 8668729950, scope: ['profile'] }, function(result) {
+      if (!result || result.error) return;
+      try { sessionStorage.setItem('tg_user', JSON.stringify(result.user)); } catch(_) {}
+      showLoggedIn(result.user);
+    });
   }
 
   function tgLogout() {
