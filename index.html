@@ -107,6 +107,13 @@ body {
   transition: color 0.15s, background 0.15s;
 }
 .nav-link:hover { color: var(--hero-text); background: rgba(255,255,255,0.07); }
+.nav-login-btn {
+  color: var(--hero-text);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  margin-left: 4px;
+}
+.nav-login-btn:hover { background: rgba(255,255,255,0.12); }
 
 /* ── Hero ── */
 .hero {
@@ -466,6 +473,79 @@ body {
   margin-top: 28px;
 }
 
+/* ── Member login section ── */
+.login-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 28px;
+  text-align: center;
+}
+.login-section-inner { max-width: 480px; margin: 0 auto; }
+.login-section .section-label { display: block; margin-bottom: 12px; }
+.login-section h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.login-section p {
+  font-size: 15.5px;
+  color: var(--text-mid);
+  margin-bottom: 28px;
+}
+.tg-widget-wrap {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+/* Post-login card */
+.tg-logged-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.tg-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+.tg-welcome {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+.tg-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cta);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.tg-open-btn:hover { background: var(--cta-hover); }
+.tg-logout {
+  font-size: 13px;
+  color: var(--text-soft);
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.tg-logout:hover { color: var(--text-mid); }
+
 /* ── Coming soon strip ── */
 .coming-strip {
   background: var(--surface);
@@ -685,6 +765,7 @@ body {
     <a href="#invoicebot" class="nav-link">EzeInvoice</a>
     <a href="#linguapractice" class="nav-link nav-hide-xs">LinguaPractice</a>
     <a href="mailto:info@touls.work" class="nav-link">Contact</a>
+    <a href="#login" class="nav-link nav-login-btn">Login</a>
   </div>
 </nav>
 
@@ -812,6 +893,37 @@ body {
           Score: 10/10 · Perfect!
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Member login ── -->
+<div class="login-section" id="login">
+  <div class="login-section-inner">
+    <span class="section-label">Member access</span>
+    <h2>Already using EzeInvoice?</h2>
+    <p>Log in with your Telegram account and jump straight into your bot.</p>
+
+    <!-- Widget shown before login -->
+    <div class="tg-widget-wrap" id="tg-widget-wrap">
+      <script async src="https://telegram.org/js/telegram-widget.js?22"
+        data-telegram-login="invois_bot"
+        data-size="large"
+        data-userpic="true"
+        data-onauth="onTelegramAuth(user)"
+        data-request-access="write">
+      </script>
+    </div>
+
+    <!-- Shown after login -->
+    <div class="tg-logged-in" id="tg-logged-in" hidden>
+      <img class="tg-avatar" id="tg-avatar" src="" alt="" hidden>
+      <p class="tg-welcome" id="tg-welcome"></p>
+      <a href="https://t.me/invois_bot" class="tg-open-btn" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Open EzeInvoice Bot
+      </a>
+      <button class="tg-logout" onclick="tgLogout()">Not you? Log out</button>
     </div>
   </div>
 </div>
@@ -1005,4 +1117,35 @@ body {
         '<div class="mock-sent-badge">Sent to client</div>';
     }
   })();
+
+  // ── Telegram login ─────────────────────────────────────────────────────────
+  function showLoggedIn(user) {
+    document.getElementById('tg-widget-wrap').hidden = true;
+    var loggedIn = document.getElementById('tg-logged-in');
+    loggedIn.hidden = false;
+    document.getElementById('tg-welcome').textContent = 'Welcome back, ' + user.first_name + '!';
+    if (user.photo_url) {
+      var img = document.getElementById('tg-avatar');
+      img.src = user.photo_url;
+      img.hidden = false;
+    }
+  }
+
+  function onTelegramAuth(user) {
+    try { sessionStorage.setItem('tg_user', JSON.stringify(user)); } catch(_) {}
+    showLoggedIn(user);
+  }
+
+  function tgLogout() {
+    try { sessionStorage.removeItem('tg_user'); } catch(_) {}
+    document.getElementById('tg-widget-wrap').hidden = false;
+    document.getElementById('tg-logged-in').hidden = true;
+    document.getElementById('tg-avatar').hidden = true;
+  }
+
+  // Restore session on page reload
+  try {
+    var stored = sessionStorage.getItem('tg_user');
+    if (stored) showLoggedIn(JSON.parse(stored));
+  } catch(_) {}
 </script>
