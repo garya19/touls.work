@@ -107,13 +107,6 @@ body {
   transition: color 0.15s, background 0.15s;
 }
 .nav-link:hover { color: var(--hero-text); background: rgba(255,255,255,0.07); }
-.nav-login-btn {
-  color: var(--hero-text);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 6px;
-  margin-left: 4px;
-}
-.nav-login-btn:hover { background: rgba(255,255,255,0.12); }
 
 /* ── Hero ── */
 .hero {
@@ -473,95 +466,6 @@ body {
   margin-top: 28px;
 }
 
-/* ── Member login section ── */
-.login-section {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 64px 28px;
-  text-align: center;
-}
-.login-section-inner { max-width: 480px; margin: 0 auto; }
-.login-section .section-label { display: block; margin-bottom: 12px; }
-.login-section h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(20px, 3vw, 26px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin-bottom: 10px;
-}
-.login-section p {
-  font-size: 15.5px;
-  color: var(--text-mid);
-  margin-bottom: 28px;
-}
-.tg-widget-wrap {
-  display: flex;
-  justify-content: center;
-  min-height: 44px;
-}
-.tg-login-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #229ED9;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.18s;
-}
-.tg-login-btn:hover { background: #1A87BD; }
-/* Post-login card */
-.tg-logged-in {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.tg-avatar {
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border);
-}
-.tg-welcome {
-  font-family: 'Outfit', sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text);
-}
-.tg-open-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--cta);
-  color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 14.5px;
-  font-weight: 600;
-  padding: 11px 22px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.15s;
-}
-.tg-open-btn:hover { background: var(--cta-hover); }
-.tg-logout {
-  font-size: 13px;
-  color: var(--text-soft);
-  cursor: pointer;
-  text-decoration: underline;
-  background: none;
-  border: none;
-  padding: 0;
-}
-.tg-logout:hover { color: var(--text-mid); }
-
 /* ── Coming soon strip ── */
 .coming-strip {
   background: var(--surface);
@@ -781,7 +685,6 @@ body {
     <a href="#invoicebot" class="nav-link">EzeInvoice</a>
     <a href="#linguapractice" class="nav-link nav-hide-xs">LinguaPractice</a>
     <a href="mailto:info@touls.work" class="nav-link">Contact</a>
-    <a href="#login" class="nav-link nav-login-btn">Login</a>
   </div>
 </nav>
 
@@ -834,9 +737,9 @@ body {
             Subscribe — Rs. 299/mo
           </a>
         </div>
-        <!-- Overseas: USD pricing -->
+        <!-- Overseas: DodoPayments USD pricing -->
         <div id="subscribe-overseas" class="subscribe-wrap" hidden>
-          <a href="https://rzp.io/rzp/2yzyXK8U" class="product-cta" target="_blank" rel="noopener">
+          <a href="https://checkout.dodopayments.com/buy/pdt_0NoMYZ9NpSDGHMwbl05pG?quantity=1" class="product-cta" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="white" stroke-width="2"/><path d="M2 10h20" stroke="white" stroke-width="2"/></svg>
             Subscribe — $8/mo
           </a>
@@ -913,35 +816,6 @@ body {
   </div>
 </div>
 
-<!-- ── Member login ── -->
-<div class="login-section" id="login">
-  <div class="login-section-inner">
-    <span class="section-label">Get started</span>
-    <h2>Sign in with Telegram</h2>
-    <p>New here? Sign in to start your free trial — 3 invoices, no card needed.<br>Already a subscriber? Jump straight back into your bot.</p>
-
-    <!-- Widget shown before login -->
-    <div class="tg-widget-wrap" id="tg-widget-wrap">
-      <button class="tg-login-btn" id="tg-login-btn" onclick="openTelegramLogin()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.24 13.748l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.908.811z"/></svg>
-        Sign in with Telegram
-      </button>
-      <script src="https://telegram.org/js/telegram-login.js"></script>
-    </div>
-
-    <!-- Shown after login -->
-    <div class="tg-logged-in" id="tg-logged-in" hidden>
-      <img class="tg-avatar" id="tg-avatar" src="" alt="" hidden>
-      <p class="tg-welcome" id="tg-welcome"></p>
-      <a href="https://t.me/invois_bot" class="tg-open-btn" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Open EzeInvoice Bot
-      </a>
-      <button class="tg-logout" onclick="tgLogout()">Not you? Log out</button>
-    </div>
-  </div>
-</div>
-
 <!-- ── Coming soon ── -->
 <div class="coming-strip">
   <p><strong>More tools in the works.</strong> We're building a suite of focused utilities for everyday tasks — scheduling, expense tracking, document signing, and more. Early access via Telegram.</p>
@@ -992,7 +866,8 @@ body {
         <ul>
           <li><strong>Telegram</strong> — the messaging platform through which both bots operate. Subject to <a href="https://telegram.org/privacy" target="_blank" rel="noopener">Telegram's Privacy Policy</a>.</li>
           <li><strong>Anthropic Claude API</strong> — LinguaPractice uses Claude to evaluate responses and generate conversation replies. Message text is sent to Anthropic's API and subject to <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>.</li>
-          <li><strong>Razorpay</strong> — processes subscription payments for EzeInvoice. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.</li>
+          <li><strong>Razorpay</strong> — processes subscription payments for India-based EzeInvoice users. Governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener">Razorpay's Privacy Policy</a>.</li>
+          <li><strong>DodoPayments</strong> — processes subscription payments for overseas EzeInvoice users. Governed by <a href="https://dodopayments.com/privacy" target="_blank" rel="noopener">DodoPayments' Privacy Policy</a>.</li>
           <li><strong>Resend</strong> — delivers invoice and receipt emails for EzeInvoice.</li>
           <li><strong>Google</strong> — if you use the Sheets export in EzeInvoice, invoice data is written to your authorised Google Sheet.</li>
         </ul>
@@ -1024,14 +899,14 @@ body {
         <h2>Refund &amp; Cancellation Policy</h2>
       </div>
       <div class="policy-body">
-        <p>This policy applies to all subscription payments made through EzeInvoice, whether via UPI or Razorpay.</p>
+        <p>This policy applies to all subscription payments made through EzeInvoice — via UPI or Razorpay (India) and via DodoPayments (overseas).</p>
 
         <h3>Free trial</h3>
         <p>Every new user receives a free trial allowing up to 3 invoices to be sent at no charge. No payment is required during the trial period.</p>
 
         <h3>Subscription terms</h3>
         <ul>
-          <li>Subscriptions are billed monthly: Rs. 299/month for India, $9/month for international users.</li>
+          <li>Subscriptions are billed monthly: Rs. 299/month for India (via Razorpay), $8/month for international users (via DodoPayments).</li>
           <li>Each payment grants 30 days of unlimited invoice access from the date of confirmation.</li>
           <li>Subscriptions do not auto-renew — you pay each month when you choose to continue.</li>
         </ul>
@@ -1052,7 +927,7 @@ body {
         <h3>How to request a refund</h3>
         <div class="contact-box">
           <strong>Refund requests</strong>
-          <a href="mailto:info@touls.work">info@touls.work</a> — include your Razorpay payment ID or UPI transaction reference.<br><br>
+          <a href="mailto:info@touls.work">info@touls.work</a> — include your Razorpay payment ID, UPI transaction reference, or DodoPayments order ID.<br><br>
           We respond within 2 business days and process approved refunds within 5–7 business days.
         </div>
       </div>
@@ -1131,43 +1006,4 @@ body {
         '<div class="mock-sent-badge">Sent to client</div>';
     }
   })();
-
-  // ── Telegram login ─────────────────────────────────────────────────────────
-  function showLoggedIn(user) {
-    document.getElementById('tg-widget-wrap').hidden = true;
-    document.getElementById('tg-logged-in').hidden = false;
-    var name = user.given_name || user.name || user.first_name || 'there';
-    document.getElementById('tg-welcome').textContent = 'Welcome, ' + name + '!';
-    var pic = user.picture || user.photo_url;
-    if (pic) {
-      var img = document.getElementById('tg-avatar');
-      img.src = pic;
-      img.hidden = false;
-    }
-  }
-
-  function openTelegramLogin() {
-    if (typeof Telegram === 'undefined' || !Telegram.Login) {
-      alert('Telegram login is loading, please try again in a moment.');
-      return;
-    }
-    Telegram.Login.auth({ client_id: 8668729950, scope: ['profile'] }, function(result) {
-      if (!result || result.error) return;
-      try { sessionStorage.setItem('tg_user', JSON.stringify(result.user)); } catch(_) {}
-      showLoggedIn(result.user);
-    });
-  }
-
-  function tgLogout() {
-    try { sessionStorage.removeItem('tg_user'); } catch(_) {}
-    document.getElementById('tg-widget-wrap').hidden = false;
-    document.getElementById('tg-logged-in').hidden = true;
-    document.getElementById('tg-avatar').hidden = true;
-  }
-
-  // Restore session on page reload
-  try {
-    var stored = sessionStorage.getItem('tg_user');
-    if (stored) showLoggedIn(JSON.parse(stored));
-  } catch(_) {}
 </script>
